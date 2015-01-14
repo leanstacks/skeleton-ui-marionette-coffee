@@ -52,7 +52,11 @@ gulp.task 'templates', ->
      .pipe(gulp.dest('dist/assets/app/js'))
 
 gulp.task 'html', ->
-  gulp.src('src/main/app/*.html')
+  gulp.src(['src/main/app/*.html', '!src/main/app/styleguide.html'])
+    .pipe(gulp.dest('dist'))
+
+gulp.task 'stylehtml', ->
+  gulp.src('src/main/app/styleguide.html')
     .pipe(gulp.dest('dist'))
 
 gulp.task 'css', ->
@@ -78,10 +82,11 @@ gulp.task 'default', ['clean'], ->
 gulp.task 'dist', ['clean'], ->
   sequence ['lib', 'templates', 'scripts', 'html', 'css', 'images'], 'tar'
 
-gulp.task 'run', ['lib', 'templates', 'scripts', 'html', 'css', 'images'], ->
+gulp.task 'run', ['lib', 'templates', 'scripts', 'html', 'stylehtml', 'css', 'images'], ->
   gulp.watch 'src/main/app/templates/**/*.html', ['templates']
   gulp.watch 'src/main/app/coffee/**/*.coffee', ['scripts']
   gulp.watch 'src/main/app/*.html', ['html']
+  gulp.watch 'src/main/app/styleguide.html', ['stylehtml']
   gulp.watch 'src/main/app/css/**/*.css', ['css']
   gulp.watch 'src/main/app/img/**/*', ['images']
   gulp.watch 'lib/**', ['lib']
