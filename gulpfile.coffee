@@ -13,6 +13,7 @@ del = require 'del'
 sequence = require 'run-sequence'
 tar = require 'gulp-tar'
 gzip = require 'gulp-gzip'
+karma = require('karma').server
 
 config =
   name: 'skeleton'
@@ -76,6 +77,11 @@ gulp.task 'tar', ->
     .pipe(gzip())
     .pipe(gulp.dest('dist'))
 
+gulp.task 'unittest', ->
+  karma.start
+    configFile: __dirname + '/karma.conf.coffee'
+    singleRun: true
+
 gulp.task 'default', ['clean'], ->
   gulp.start 'lib', 'templates', 'scripts', 'html', 'css', 'images'
 
@@ -96,3 +102,6 @@ gulp.task 'run', ['lib', 'templates', 'scripts', 'html', 'stylehtml', 'css', 'im
       port: 9000
       livereload: true
     ))
+
+gulp.task 'test', ['clean'], ->
+  sequence ['lib', 'templates', 'scripts', 'html', 'css', 'images'], 'unittest'

@@ -25,6 +25,7 @@ The project requires the following dependencies be installed on the host machine
 * Node.js (node)
 * Node Package Manager (npm)
 * Gulp Command Line Interface (gulp)
+* Karma Command Line Interface (karma)
 
 After installing the dependencies, initialize the project.  Open a terminal window, navigate to the project base directory, and issue this command:
 
