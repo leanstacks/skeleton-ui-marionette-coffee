@@ -81,6 +81,20 @@ Open a browser and go to http://localhost:9000/index.html to use the application
 
 To stop the HTTP server press `ctrl-C` in the terminal window.
 
+### Test
+
+The **test** Gulp task performs all of the same workflow steps as the default task and also:
+
+* executes the unit test suites
+
+The **test** Gulp task is designed to allow engineers the means to run the unit test suites against the main source code.  This task may also be used on continuous integration servers such as Jenkins, etc.
+
+To execute the **test** Gulp task, type the following command at a terminal prompt in the project base directory.
+
+```
+gulp test
+```
+
 ### Dist
 
 The **dist** Gulp task performs all of the same workflow steps as the default task and also:
