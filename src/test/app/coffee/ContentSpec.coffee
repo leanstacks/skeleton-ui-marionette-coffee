@@ -5,8 +5,6 @@ describe 'Content Module Suite', ->
     homeView = null
 
     beforeEach ->
-      #jasmine.getFixtures().fixturesPath = 'base/src/test/app/templates'
-      #loadFixtures 'mainfixture.html'
       homeView = new window.SkeletonApp.Content.HomeView()
 
     it 'has className', ->

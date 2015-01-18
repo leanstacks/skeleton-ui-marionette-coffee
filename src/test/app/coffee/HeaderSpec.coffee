@@ -5,8 +5,6 @@ describe 'Header Module Suite', ->
     headerView = null
 
     beforeEach ->
-      #jasmine.getFixtures().fixturesPath = 'base/src/test/app/templates'
-      #loadFixtures 'mainfixture.html'
       headerView = new window.SkeletonApp.Header.HeaderView()
 
     it 'has className', ->

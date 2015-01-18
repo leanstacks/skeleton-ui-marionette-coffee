@@ -5,8 +5,6 @@ describe 'Footer Module Suite', ->
     footerView = null
 
     beforeEach ->
-      #jasmine.getFixtures().fixturesPath = 'base/src/test/app/templates'
-      #loadFixtures 'mainfixture.html'
       footerView = new window.SkeletonApp.Footer.FooterView()
 
     it 'has className', ->
