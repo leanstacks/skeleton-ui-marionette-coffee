@@ -1,0 +1,12 @@
+body {
+  font-size: 15px;
+}
+
+footer {
+  margin-top: 50px;
+}
+
+footer div.row:first-child {
+  padding-top: 20px;
+  border-top: 1px solid #bbbbbb;
+}
