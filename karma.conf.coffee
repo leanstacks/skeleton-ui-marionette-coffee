@@ -1,5 +1,4 @@
 # Karma configuration
-# Generated on Wed Jan 14 2015 14:22:54 GMT-0500 (EST)
 
 module.exports = (config) ->
   config.set
@@ -22,11 +21,11 @@ module.exports = (config) ->
       'dist/assets/lib/backbone-1.1.2.min.js',
       'dist/assets/lib/backbone.marionette-2.3.0.min.js',
       'dist/assets/lib/bootstrap-3.3.1/js/bootstrap.min.js',
+      'src/test/app/coffee/Init.coffee',
       'dist/assets/app/js/app-templates*.js',
       'dist/assets/app/js/app*.min.js',
       'src/test/lib/jasmine-jquery-2.0.5.js'
-      {pattern: 'src/test/app/templates/**/*.html', watched: true, served: true, included: false},
-      'src/test/app/coffee/**/*.coffee'
+      'src/test/app/coffee/**/*Spec.coffee'
     ]
 
 
