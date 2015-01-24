@@ -12,11 +12,29 @@ SkeletonApp.navigate = (route, options) ->
   logger.debug "SkeletonApp.navigate route: #{ route }"
   options || ( options = {} )
   Backbone.history.navigate route, options
+  if not options.trigger
+    SkeletonApp.trackPage()
 
 
 # Retrieve the current route
-SkeletonApp.getCurrentRoute = () ->
+SkeletonApp.getCurrentRoute = ->
   Backbone.history.fragment
+
+
+# Handle Backbone History 'route' Events
+Backbone.history.on 'route', (router, route, params) ->
+  logger.debug "Handling Backbone.history 'route' event"
+  SkeletonApp.trackPage()
+
+
+# Send Page Tracking Data to Google Analytics
+# https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
+SkeletonApp.trackPage = ->
+  logger.debug "SkeletonApp.trackPage"
+  if ga?
+    page = Backbone.history.root + Backbone.history.fragment
+    logger.debug "send pageview #{ page }"
+    ga 'send', 'pageview', page
 
 
 # Create the top-level Regions
