@@ -1,0 +1,168 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h1>
+        <i class="fa fa-cube text-primary"></i> Feature: Modal Dialog
+      </h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <p class="lead">
+      This page illustrates the modal dialog box feature in action.
+      This is a Bootstrap modal dialog box that has been implemented in a
+      reusable Marionette view and template.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <p>
+      The <code>DialogView</code> class extends a Marionette ItemView.  The
+      class uses the supplied <code>options</code> hash values to render the
+      modal.  The title, body, and buttons may be set to any desired values
+      without requiring one-off code.
+    </p>
+    <p>
+      The <code>defaultOptions</code> provide out-of-the-box content and functionality
+      for a simple confirmation modal dialog box.
+    </p>
+    <p>
+      Click the button below to see a modal that uses the default options.
+    </p>
+    <p>
+      <button type="button" class="btn btn-lg btn-primary center-block js-dialog">Show Default Modal</button>
+    </p>
+    <p>
+      Now let's override the default options, by creating a modal using these options:
+    </p>
+    <p>
+      <pre>
+title: 'Terms and Conditions'
+body: 'Click ACCEPT to accept the terms and conditions.'
+buttons: [
+  title: 'Cancel'
+  triggerName: 'cancel'
+  dismiss: true
+,
+  title: 'Accept'
+  triggerName: 'accept'
+  class: 'btn-success'
+]
+      </pre>
+    </p>
+    <p>
+      <button type="button" class="btn btn-lg btn-primary center-block js-dialog-alt">Show Custom Modal</button>
+    </p>
+    <p>
+      Each button declared in the <code>buttons</code> collection is assigned a trigger event name.
+      When a modal button is clicked, DialogView invokes <code>triggerMethod</code> on itself
+      using the trigger name.  Therefore, within the code that instantiates DialogView,
+      you may listen for the view to publish, or trigger, these events and execute
+      any desired logic when they occur.
+  </div>
+  <div class="col-md-6">
+    <h5><i class="fa fa-code text-primary"></i> The DialogView Class</h5>
+    <pre>
+class Common.DialogView extends Backbone.Marionette.ItemView
+
+  defaultOptions =
+    title: 'Confirm'
+    body: 'Click OK to confirm.'
+    buttons: [
+      title: 'Cancel'
+      triggerName: 'cancel'
+      dismiss: true
+    ,
+      title: 'OK'
+      triggerName: 'ok'
+      class: 'btn-primary'
+    ]
+
+  template: 'dialog'
+
+  className: 'modal fade'
+
+  ui:
+    dialogButton: '.js-dialog-button'
+
+  events:
+    'click @ui.dialogButton': 'onButtonClicked'
+
+  initialize: (opts) ->
+    @options = _.defaults {}, opts, defaultOptions
+
+  serializeData: ->
+    @options
+
+  onShow: ->
+    @$el.modal 'show'
+
+  onHide: ->
+    @$el.modal 'hide'
+
+  onButtonClicked: (e) ->
+    e.preventDefault()
+    triggerName = $(e.target).attr 'data-trigger'
+    @triggerMethod triggerName
+    </pre>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+    <h5><i class="fa fa-code text-primary"></i> The Dialog HTML Template</h5>
+    <pre>
+&lt;div class="modal-dialog"&gt;
+
+  &lt;div class="modal-content"&gt;
+
+    &lt;div class="modal-header"&gt;
+      &lt;h4 class="modal-title"&gt;&lt;%= title %&gt;&lt;/h4&gt;
+    &lt;/div&gt;
+
+    &lt;div class="modal-body"&gt;
+      &lt;p&gt;&lt;%= body %&gt;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="modal-footer"&gt;
+      &lt;% for (i = 0; i &lt; buttons.length; i++) { %&gt;
+      &lt;button type="button"
+              class="btn js-dialog-button &lt;%= buttons[i].class ? buttons[i].class : 'btn-default' %&gt;"
+              data-trigger="&lt;%= buttons[i].triggerName %&gt;"
+            &lt;% if (buttons[i].dismiss) { %&gt;
+              data-dismiss="modal"
+            &lt;% } %&gt;
+      &gt;
+        &lt;%= buttons[i].title %&gt;
+      &lt;/button&gt;
+      &lt;% } %&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/div&gt;
+    </pre>
+  </div>
+</div>
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-12">
+    <p class="lead">
+      To see the full Marionette project skeleton, view it on
+      <i class="fa fa-github"></i> GitHub at
+      <a href="https://github.com/mwarman/skeleton-ui-marionette-coffee"
+         title="Project Skeleton for Marionette.js"
+         target="_blank">
+        mwarman/skeleton-ui-marionette-coffee
+      </a>.
+    </p>
+  </div>
+</div>
