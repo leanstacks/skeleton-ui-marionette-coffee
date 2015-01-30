@@ -8,6 +8,8 @@ SkeletonApp.module 'Feature.Dialog', (Dialog, SkeletonApp, Backbone, Marionette,
 
     ui:
       dialogButton: '.js-dialog'
+      customDialogButton: '.js-dialog-alt'
 
     triggers:
       'click @ui.dialogButton': 'dialog:show'
+      'click @ui.customDialogButton': 'dialog:custom:show'
